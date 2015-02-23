@@ -24,7 +24,7 @@ public class Conversion {
 		
 		//document.getDocumentElement().normalize();
 		
-		//System.out.println("Root Element: " + document.getDocumentElement().getNodeName());
+		System.out.println("Root Element: " + document.getDocumentElement().getNodeName());
 		
 		List<Country> countries = new ArrayList<Country>();
 		NodeList nodeList = document.getDocumentElement().getChildNodes();
