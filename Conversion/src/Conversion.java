@@ -29,7 +29,7 @@ public class Conversion {
 		
 		Document document = builder.parse("table_a1.xml");
 		
-		//document.getDocumentElement().normalize();
+		document.getDocumentElement().normalize();
 		
 		System.out.println("Root Element: " + document.getDocumentElement().getNodeName());
 		
@@ -51,8 +51,6 @@ public class Conversion {
 				String currency = elem.getElementsByTagName("Ccy")
 							.item(0).getChildNodes().item(0).getNodeValue();
 				
-
-				//countries.add(new Country(countryName, currencyName, currency));
 				addEntry(mapper, countryName, currencyName, currency);
 				
 			}
@@ -61,20 +59,15 @@ public class Conversion {
 		for (int i=0; i<countries.size(); i++) {
 			System.out.println(countries.get(i).getCountry());
 		}
-		
-		//HashMap<String, Country> mapper = new HashMap<String, Country>();
-		//mapper.put("Mexico", new Country("Mexico", "Mexican Peso", "MXN"));
+
 		Country from = mapper.get("MEXICO");
-		Country to = mapper.get("CANADA");
-		System.out.println(from.getCurName());
-		System.out.println(to.getCurName());
-		
+		Country to = mapper.get("UNITED STATES");		
 		
 		//Test convert peso to dollar
-		System.out.println("Dollar to Peso: " + convertCurrency("MXN", "USD", 1200));
+		System.out.println("Peso to Dollar: " + convertCurrency(from.getCurrency(), to.getCurrency(), 1200));
 		
 		//Test convert dollar to peso
-		System.out.println("Peso to Dollar: " + convertCurrency("USD", "MXN", 1200));
+		System.out.println("Dollar to Peso: " + convertCurrency(to.getCurrency(), from.getCurrency(), 1200));
 	}
 
 	public static Double convertCurrency(String from, String to, int amount) {

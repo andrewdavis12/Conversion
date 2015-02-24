@@ -21,4 +21,8 @@ public class Country {
 	public String getCurName() {
 		return currencyName;
 	}
+	
+	public String getCurrency() {
+		return currency;
+	}
 }
