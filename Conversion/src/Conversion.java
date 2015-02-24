@@ -1,5 +1,8 @@
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -49,7 +52,29 @@ public class Conversion {
 			}
 		}
 		
-		for (Country cntry : countries)
-			System.out.println(cntry.toString());
+		for (int i=0; i<countries.size(); i++) {
+			System.out.println(countries.get(i).getCountry());
+		}
+		
+		//Test convert peso to dollar
+		System.out.println("Dollar to Peso: " + convertCurrency("MXN", "USD", 1200));
+		
+		//Test convert dollar to peso
+		System.out.println("Peso to Dollar: " + convertCurrency("USD", "MXN", 1200));
+	}
+	
+	public static Double convertCurrency(String from, String to, int amount) {
+		try {
+			URL url = new URL("http://finance.yahoo.com/d/quotes.csv?f=l1&s="+ from + to + "=X");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+			String line = reader.readLine();
+			if (line.length()>0) {
+				return Double.parseDouble(line)*amount;
+			}
+			reader.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 }

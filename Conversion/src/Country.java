@@ -13,4 +13,8 @@ public class Country {
 	public String toString() {
 		return "<" + countryName + ", " + currencyName + ", " + currency + ">";
 	}
+	
+	public String getCountry() {
+		return countryName;
+	}
 }
