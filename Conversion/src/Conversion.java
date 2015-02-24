@@ -56,13 +56,18 @@ public class Conversion {
 			System.out.println(countries.get(i).getCountry());
 		}
 		
+		String testVar = "Mexico";
+		String currencyCode = null;
+		
+		
+		
 		//Test convert peso to dollar
 		System.out.println("Dollar to Peso: " + convertCurrency("MXN", "USD", 1200));
 		
 		//Test convert dollar to peso
 		System.out.println("Peso to Dollar: " + convertCurrency("USD", "MXN", 1200));
 	}
-	
+
 	public static Double convertCurrency(String from, String to, int amount) {
 		try {
 			URL url = new URL("http://finance.yahoo.com/d/quotes.csv?f=l1&s="+ from + to + "=X");
