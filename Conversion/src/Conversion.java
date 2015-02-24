@@ -3,8 +3,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,6 +21,8 @@ import org.xml.sax.SAXException;
 
 public class Conversion {
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+		
+		HashMap<String, Country> mapper = new HashMap<String, Country>();
 		
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
@@ -48,7 +52,9 @@ public class Conversion {
 							.item(0).getChildNodes().item(0).getNodeValue();
 				
 
-				countries.add(new Country(countryName, currencyName, currency));
+				//countries.add(new Country(countryName, currencyName, currency));
+				addEntry(mapper, countryName, currencyName, currency);
+				
 			}
 		}
 		
@@ -56,9 +62,12 @@ public class Conversion {
 			System.out.println(countries.get(i).getCountry());
 		}
 		
-		String testVar = "Mexico";
-		String currencyCode = null;
-		
+		//HashMap<String, Country> mapper = new HashMap<String, Country>();
+		//mapper.put("Mexico", new Country("Mexico", "Mexican Peso", "MXN"));
+		Country from = mapper.get("MEXICO");
+		Country to = mapper.get("CANADA");
+		System.out.println(from.getCurName());
+		System.out.println(to.getCurName());
 		
 		
 		//Test convert peso to dollar
@@ -81,5 +90,9 @@ public class Conversion {
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+	
+	static void addEntry(HashMap<String, Country> map, String countryName, String currencyName, String currency) {
+		map.put(countryName, new Country(countryName, currencyName, currency));
 	}
 }
